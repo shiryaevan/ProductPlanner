@@ -1,10 +1,13 @@
 import React from 'react';
-import { Container, Text } from '../../components/';
+import { useNavigation } from '@react-navigation/native';
+
+import { Button, Container } from '../../ui/';
 
 export const Home = () => {
+  const navigation = useNavigation();
   return (
     <Container>
-      <Text type="header" />
+      <Button onPress={() => navigation.navigate('Recipes')}>Добавить список</Button>
     </Container>
   );
 };
