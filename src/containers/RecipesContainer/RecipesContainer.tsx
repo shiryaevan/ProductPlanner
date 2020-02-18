@@ -1,13 +1,25 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 
 import { Recipes } from '../../screens/';
+import { recipes } from '../../store/recipes/actions';
 
-export class RecipesContainer extends Component {
-    componentDidMount() {
+class RecipesContainerPure extends Component {
+  componentDidMount() {
+    this.props.recipes();
+  }
 
-    }
-
-    render() {
+  render() {
     return <Recipes />;
   }
 }
+
+const mapStateToProps = state => {
+  return {};
+};
+
+const mapDispatchToProps = {
+  recipes,
+};
+
+export const RecipesContainer = connect(mapStateToProps, mapDispatchToProps)(RecipesContainerPure);
