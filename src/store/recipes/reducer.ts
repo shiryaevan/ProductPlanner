@@ -4,15 +4,17 @@ const initialState = {
   recipes: [],
 };
 
-export function recipes(state = initialState, action) {
+export function recipes(state = [], action) {
   switch (action.type) {
-    case GET_RECIPES_REUEST:
+    case GET_RECIPES_REUEST: {
       return { ...state, isLoading: true };
+    }
     case GET_RECIPES_SUCCESS: {
       return { ...state, isLoading: false, recipes: action.data };
     }
-    case GET_RECIPES_REUEST:
+    case GET_RECIPES_REUEST: {
       return { ...state, isLoading: false };
+    }
     default:
       return state;
   }

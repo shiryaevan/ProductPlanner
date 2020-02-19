@@ -2,24 +2,33 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import { Recipes } from '../../screens/';
-import { recipes } from '../../store/recipes/actions';
+import { recipes as resipesAction } from '../../store/recipes/actions';
+import { Text } from 'react-native';
 
 class RecipesContainerPure extends Component {
   componentDidMount() {
-    this.props.recipes();
+    this.props.resipesAction();
   }
 
   render() {
-    return <Recipes />;
+    const { recipes } = this.props;
+    console.log(recipes);
+
+    return recipes ? <Recipes items={recipes} /> : <Text>Loading</Text>;
   }
 }
 
 const mapStateToProps = state => {
-  return {};
+  return {
+    recipes: state.recipes,
+  };
 };
 
 const mapDispatchToProps = {
-  recipes,
+  resipesAction,
 };
 
-export const RecipesContainer = connect(mapStateToProps, mapDispatchToProps)(RecipesContainerPure);
+export const RecipesContainer = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(RecipesContainerPure);
