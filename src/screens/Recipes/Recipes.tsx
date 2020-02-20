@@ -1,12 +1,18 @@
 import React from 'react';
-import { Button, Container } from '../../ui/';
-import { Text, View } from 'react-native';
+import { Text } from 'react-native';
 
-export const Recipes = ({ items }) => {
+import { Container } from '../../ui/';
+import { IRecipe } from '../../store/recipes/interfaces';
+
+type Props = {
+  items: IRecipe[];
+};
+
+export const Recipes = ({ items }: Props) => {
   return (
     <Container>
-      {items.map(i => (
-        <Text>{i.title}</Text>
+      {items.map((i, index) => (
+        <Text key={index}>{i.title}</Text>
       ))}
     </Container>
   );

@@ -1,31 +1,36 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
-import { Recipes } from '../../screens/';
-import { recipes as resipesAction } from '../../store/recipes/actions';
 import { Text } from 'react-native';
 
-class RecipesContainerPure extends Component {
+import { Recipes } from '../../screens/';
+import { getRecipes } from '../../store/recipes/actions';
+import { storeType } from '../../store';
+
+type Props = {
+  getRecipes: () => void;
+} & ReturnType<typeof mapStateToProps>;
+
+class RecipesContainerPure extends Component<Props> {
   componentDidMount() {
-    this.props.resipesAction();
+    this.props.getRecipes();
   }
 
   render() {
-    const { recipes } = this.props;
-    console.log(recipes);
+    const { recipes, isLoading } = this.props;
 
-    return recipes ? <Recipes items={recipes} /> : <Text>Loading</Text>;
+    return isLoading ? <Text>Loading</Text> : <Recipes items={recipes} />;
   }
 }
 
-const mapStateToProps = state => {
+const mapStateToProps = (state: storeType) => {
   return {
-    recipes: state.recipes,
+    isLoading: state.recipes.isLoading,
+    recipes: state.recipes.recipes,
   };
 };
 
 const mapDispatchToProps = {
-  resipesAction,
+  getRecipes,
 };
 
 export const RecipesContainer = connect(

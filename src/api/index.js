@@ -7,6 +7,5 @@ const instance = axios.create({
 export const recipesApi = {
   getRecipes() {
     return instance.get('recipes').then(response => response.data);
-    debugger;
   },
 };
