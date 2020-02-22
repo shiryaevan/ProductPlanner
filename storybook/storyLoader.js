@@ -5,12 +5,14 @@
 
 function loadStories() {
 	require('../src/screens/Home/Home.stories');
+	require('../src/screens/Recipes/Recipes.stories');
 	require('../src/ui/Button/Button.stories');
 	require('../src/ui/Text/Text.stories');
 }
 
 const stories = [
 	'../src/screens/Home/Home.stories',
+	'../src/screens/Recipes/Recipes.stories',
 	'../src/ui/Button/Button.stories',
 	'../src/ui/Text/Text.stories'
 ];
