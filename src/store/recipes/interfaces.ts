@@ -1,4 +1,4 @@
-interface IIngredient {
+export interface IIngredient {
   title: string;
   count: string;
 }

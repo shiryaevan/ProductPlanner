@@ -6,6 +6,7 @@
 function loadStories() {
 	require('../src/components/RecipeItem/RecipeItem.stories');
 	require('../src/screens/Home/Home.stories');
+	require('../src/screens/Recipe/Recipe.stories');
 	require('../src/screens/Recipes/Recipes.stories');
 	require('../src/ui/Aligner/Aligner.stories');
 	require('../src/ui/Button/Button.stories');
@@ -18,6 +19,7 @@ function loadStories() {
 const stories = [
 	'../src/components/RecipeItem/RecipeItem.stories',
 	'../src/screens/Home/Home.stories',
+	'../src/screens/Recipe/Recipe.stories',
 	'../src/screens/Recipes/Recipes.stories',
 	'../src/ui/Aligner/Aligner.stories',
 	'../src/ui/Button/Button.stories',
