@@ -1,13 +1,15 @@
 import React from 'react';
-import { useNavigation } from '@react-navigation/native';
 
 import { Button, Container } from '../../ui/';
 
-export const Home = () => {
-  const navigation = useNavigation();
+type Props = {
+  onPressAddList?: () => void;
+};
+
+export const Home = ({ onPressAddList = () => {} }: Props) => {
   return (
     <Container>
-      <Button onPress={() => navigation.navigate('Recipes')}>Добавить список</Button>
+      <Button onPress={onPressAddList}>Добавить список</Button>
     </Container>
   );
 };

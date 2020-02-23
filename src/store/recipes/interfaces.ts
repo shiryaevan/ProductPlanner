@@ -6,7 +6,8 @@ interface IIngredient {
 export interface IRecipe {
   id: number;
   title: string;
-  ingredients: IIngredient[];
+  image?: string;
+  ingredients?: IIngredient[];
 }
 
 export interface IRecipes {
