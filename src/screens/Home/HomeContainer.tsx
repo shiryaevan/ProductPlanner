@@ -1,16 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { useNavigation } from '@react-navigation/core';
 
 import { Home } from './Home';
-import { useNavigation } from '@react-navigation/core';
 
 type Props = {};
 
-export class HomeContainer extends Component<Props> {
-  private navigation = useNavigation();
+export const HomeContainer = ({}: Props) => {
+  const navigation = useNavigation();
 
-  handleOnPressAddList = () => this.navigation.navigate('Recipes');
+  const handleOnPressAddList = () => navigation.navigate('Recipes');
 
-  render() {
-    return <Home onPressAddList={this.handleOnPressAddList} />;
-  }
-}
+  return <Home onPressAddList={handleOnPressAddList} />;
+};

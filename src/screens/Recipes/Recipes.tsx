@@ -1,19 +1,22 @@
 import React from 'react';
 
-import { Container } from '../../ui/';
+import { Button, Container } from '../../ui/';
 import { IRecipe } from '../../store/recipes/interfaces';
-import { RecipeItem } from '../../components/RecipeItem';
+import { RecipeItem, PropsRecipeItem } from '../../components/RecipeItem';
 
 type Props = {
   items: IRecipe[];
-};
+} & Pick<PropsRecipeItem, 'onItemPress'>;
 
-export const Recipes = ({ items }: Props) => {
+export const Recipes = ({ items, onItemPress }: Props) => {
   return (
-    <Container paddingHorizontal={0}>
-      {items.map((i, index) => (
-        <RecipeItem key={index} itemData={i} />
-      ))}
-    </Container>
+    <>
+      <Container paddingHorizontal={0}>
+        {items.map((i, index) => (
+          <RecipeItem key={index} itemData={i} onItemPress={onItemPress} />
+        ))}
+      </Container>
+      <Button>Сохранить список</Button>
+    </>
   );
 };

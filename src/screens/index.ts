@@ -1,2 +1,3 @@
-export * from './Home';
-export * from './Recipes';
+export * from './Home/HomeContainer';
+export * from './Recipe/RecipeContainer';
+export * from './Recipes/RecipesContainer';

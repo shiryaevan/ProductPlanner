@@ -5,3 +5,4 @@ export * from './Container';
 export * from './Icon';
 export * from './Spacer';
 export * from './Text';
+export * from './TextInput';

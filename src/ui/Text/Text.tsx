@@ -1,10 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import { Text as NativeText } from 'react-native';
 
-type Props = {
-  children: string;
-};
+type Props = {};
 
-export const Text = ({ children }: Props) => {
+export const Text: FC<Props> = ({ children }) => {
   return <NativeText>{children}</NativeText>;
 };

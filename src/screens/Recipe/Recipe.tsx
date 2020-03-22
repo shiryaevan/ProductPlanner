@@ -5,9 +5,9 @@ import { Container, Spacer, Text } from '../../ui/';
 import { IRecipe } from '../../store/recipes/interfaces';
 import { Ingredient } from './Ingredient';
 
-type Props = {} & IRecipe;
+export type PropsRecipe = {} & IRecipe;
 
-export const Recipe = ({ id, title, image, ingredients }: Props) => {
+export const Recipe = ({ id, title, image, ingredients }: PropsRecipe) => {
   return (
     <Container>
       <Image source={{ uri: image }} style={{ height: 200 }} />
