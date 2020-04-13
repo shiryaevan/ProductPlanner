@@ -1,6 +1,7 @@
 export interface IIngredient {
   title: string;
-  count: string;
+  value: number | string;
+  unit?: string;
 }
 
 export interface IRecipe {
@@ -12,5 +13,5 @@ export interface IRecipe {
 
 export interface IRecipes {
   isLoading: boolean;
-  recipes: IRecipe[];
+  recipes: { [key: number]: IRecipe };
 }

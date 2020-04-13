@@ -7,6 +7,7 @@ function loadStories() {
 	require('../src/components/Field/Field.stories');
 	require('../src/components/RecipeItem/RecipeItem.stories');
 	require('../src/screens/Home/Home.stories');
+	require('../src/screens/ProductList/ProductList.stories');
 	require('../src/screens/Recipe/Recipe.stories');
 	require('../src/screens/Recipes/Recipes.stories');
 	require('../src/screens/SaveList/SaveList.stories');
@@ -23,6 +24,7 @@ const stories = [
 	'../src/components/Field/Field.stories',
 	'../src/components/RecipeItem/RecipeItem.stories',
 	'../src/screens/Home/Home.stories',
+	'../src/screens/ProductList/ProductList.stories',
 	'../src/screens/Recipe/Recipe.stories',
 	'../src/screens/Recipes/Recipes.stories',
 	'../src/screens/SaveList/SaveList.stories',

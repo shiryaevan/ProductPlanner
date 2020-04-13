@@ -1,19 +1,38 @@
 import React from 'react';
+import { Form } from 'react-final-form';
 
 import { Button, Container } from '../../ui';
 import { Field } from '../../components';
 
-type Props = {
-  listName?: string;
-  onListNameChange?: () => void;
-  onSavePress?: () => void;
+type PropsSaveList = {
+  onSaveListPress: (listName: string) => void;
 };
 
-export const SaveList = ({ onSavePress, listName, onListNameChange }: Props) => {
+type FormValues = {
+  listName: string;
+};
+
+export const SaveList = ({ onSaveListPress }: PropsSaveList) => {
+  const onSubmitHandler = (values: FormValues) => {
+    onSaveListPress(values.listName);
+  };
+
   return (
     <Container>
-      <Field label="Название списка" value={listName} onChangeText={onListNameChange} />
-      <Button onPress={onSavePress}>Сохранить список</Button>
+      <Form
+        onSubmit={onSubmitHandler}
+        render={({ handleSubmit }) => (
+          <>
+            <Field
+              name="listName"
+              inputProps={{
+                label: 'Название списка',
+              }}
+            />
+            <Button onPress={handleSubmit}>Сохранить список</Button>
+          </>
+        )}
+      />
     </Container>
   );
 };

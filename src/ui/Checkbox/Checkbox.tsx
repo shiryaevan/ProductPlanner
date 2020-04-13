@@ -1,21 +1,18 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import { TouchableOpacity } from 'react-native';
 
 import { styles } from './styles';
 import { Icon } from '../Icon/';
 
 type Props = {
-  onPress?: () => void;
+  onChange?: (e: any) => void;
   checked?: boolean;
 };
 
-export const Checkbox = ({ checked: defaultValue, onPress = () => {} }: Props) => {
-  const [checked, setChecked] = useState(defaultValue);
-
-  const handleOnPress = () => {
-    setChecked(!checked);
-    onPress();
-  };
+export const Checkbox = ({ checked, onChange = () => {} }: Props) => {
+  const handleOnPress = useCallback(() => {
+    onChange(!checked);
+  }, [checked, onChange]);
 
   return (
     <TouchableOpacity style={styles.checkbox} onPress={handleOnPress}>

@@ -1,25 +1,33 @@
-export function requestMiddleware({ dispatch, getState }) {
-  return next => action => {
-    const { types, request } = action;
+import { Dispatch, Middleware, MiddlewareAPI } from 'redux';
 
-    if (!types && !request) return next(action);
+export const requestMiddleware: Middleware = ({ dispatch }: MiddlewareAPI) => {
+  return (next: Dispatch) => action => {
+    const { types, type, request } = action;
 
-    const [pendingType, successType, errorType] = types;
+    if ((!types || !type) && !request) {
+      return next(action);
+    }
 
-    dispatch({ type: pendingType });
+    if (type) {
+      dispatch({ type: type, payload: request });
+    } else {
+      const [pendingType, successType, errorType] = types;
 
-    return request
-      .then(response => {
-        dispatch({
-          type: successType,
-          payload: response,
+      dispatch({ type: pendingType, payload: request });
+
+      return request
+        .then((response: any) => {
+          dispatch({
+            type: successType,
+            payload: response,
+          });
+        })
+        .catch((error: any) => {
+          dispatch({
+            type: errorType,
+            payload: error,
+          });
         });
-      })
-      .catch(error => {
-        dispatch({
-          type: errorType,
-          payload: error,
-        });
-      });
+    }
   };
-}
+};

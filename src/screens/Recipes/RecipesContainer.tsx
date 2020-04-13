@@ -1,41 +1,47 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { Text } from 'react-native';
 
 import { Recipes } from './Recipes';
-import { getRecipes } from '../../store/recipes/actions';
-import { storeType } from '../../store';
+import { IStore } from '../../store';
 import { useNavigation } from '@react-navigation/native';
-import { IRecipe } from '../../store/recipes/interfaces';
 
 type Props = {
   getRecipes: () => void;
 } & ReturnType<typeof mapStateToProps>;
 
-const RecipesContainerPure = ({ recipes, isLoading, getRecipes }: Props) => {
-  useEffect(() => {
-    (async () => await getRecipes())();
-  }, []);
+const prepareSelectedRecipesIds = (data: string[]) => {
+  const tmpArr: number[] = [];
+  // transform _5 -> 5
+  Object.entries(data).forEach(([key, value]) => value && tmpArr.push(Number(key.substr(1))));
+  return tmpArr;
+};
+
+const RecipesContainerPure = ({ recipes, isLoading }: Props) => {
   const navigation = useNavigation();
 
-  const onItemPressHandler = (recipeItem: IRecipe) => {
+  const onItemPressHandler = (recipeId: number) => {
     navigation.navigate('Recipe', {
-      ...recipeItem,
+      id: recipeId,
     });
   };
 
-  return isLoading ? <Text>Loading</Text> : <Recipes items={recipes} onItemPress={onItemPressHandler} />;
-};
-
-const mapStateToProps = (state: storeType) => {
-  return {
-    isLoading: state.recipes.isLoading,
-    recipes: state.recipes.recipes,
+  const onSaveListPressHandler = (values: string[]) => {
+    navigation.navigate('SaveList', {
+      selectedRecipesIds: prepareSelectedRecipesIds(values),
+    });
   };
+
+  return isLoading ? (
+    <Text>Loading</Text>
+  ) : (
+    <Recipes items={recipes} onSaveListPress={onSaveListPressHandler} onItemPress={onItemPressHandler} />
+  );
 };
 
-const mapDispatchToProps = {
-  getRecipes,
-};
+const mapStateToProps = (state: IStore) => ({
+  isLoading: state.recipes.isLoading,
+  recipes: state.recipes.recipes,
+});
 
-export const RecipesContainer = connect(mapStateToProps, mapDispatchToProps)(RecipesContainerPure);
+export const RecipesContainer = connect(mapStateToProps)(RecipesContainerPure);

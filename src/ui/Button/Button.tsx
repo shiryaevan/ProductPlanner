@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 import { TouchableOpacity, ViewStyle } from 'react-native';
 
-import { Text } from '../';
+import { Text } from '../Text';
 import { styles } from './styles';
 
 type Props = {

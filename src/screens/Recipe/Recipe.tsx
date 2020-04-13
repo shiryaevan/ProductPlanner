@@ -7,7 +7,7 @@ import { Ingredient } from './Ingredient';
 
 export type PropsRecipe = {} & IRecipe;
 
-export const Recipe = ({ id, title, image, ingredients }: PropsRecipe) => {
+export const Recipe = ({ title, image, ingredients }: PropsRecipe) => {
   return (
     <Container>
       <Image source={{ uri: image }} style={{ height: 200 }} />

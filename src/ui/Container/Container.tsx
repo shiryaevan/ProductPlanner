@@ -1,5 +1,5 @@
 import React, { ReactNode } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { ScrollView, StyleSheet, View } from 'react-native';
 
 type Props = {
   paddingHorizontal?: number;
@@ -31,5 +31,9 @@ export const Container = ({
     },
   });
 
-  return <View style={styles.container}>{children}</View>;
+  return (
+    <ScrollView>
+      <View style={styles.container}>{children}</View>
+    </ScrollView>
+  );
 };

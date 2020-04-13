@@ -2,11 +2,11 @@ import React from 'react';
 
 import { Text, TextInput, Spacer, PropsTextInput } from '../../ui';
 
-type Props = {
+export type PropsField = {
   label?: string;
 } & PropsTextInput;
 
-export const Field = ({ label, ...rest }: Props) => {
+export const Field = ({ label, ...rest }: PropsField) => {
   return (
     <>
       {label && <Text>{label}</Text>}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { SyntheticEvent, useCallback } from 'react';
 import { Image } from 'react-native';
 
 import { IRecipe } from '../../store/recipes/interfaces';
@@ -7,16 +7,21 @@ import { styles } from './styles';
 
 export type PropsRecipeItem = {
   itemData: IRecipe;
-  onItemPress?: (recipeItem: IRecipe) => void;
+  onItemPress?: (recipeId: number) => void;
+  onCheckboxChange?: (e: SyntheticEvent) => void;
+  checkboxChecked?: boolean;
 };
 
-export const RecipeItem = ({ itemData, onItemPress }: PropsRecipeItem) => {
-  const onItemPressHandler = (recipeItem: IRecipe) => {
-    onItemPress && onItemPress(recipeItem);
-  };
+export const RecipeItem = ({ itemData, onItemPress, checkboxChecked, onCheckboxChange }: PropsRecipeItem) => {
+  const onItemPressHandler = useCallback(
+    (recipeId: number) => () => {
+      onItemPress && onItemPress(recipeId);
+    },
+    [onItemPress],
+  );
 
   return (
-    <Button type="unstyled" style={styles.recipeItem} onPress={() => onItemPressHandler(itemData)}>
+    <Button type="unstyled" style={styles.recipeItem} onPress={onItemPressHandler(itemData.id)}>
       <Aligner>
         <Aligner>
           <Image style={{ width: 60, height: 60 }} source={{ uri: itemData.image }} />
@@ -24,7 +29,7 @@ export const RecipeItem = ({ itemData, onItemPress }: PropsRecipeItem) => {
           <Text>{itemData.title}</Text>
         </Aligner>
         <Aligner.Right>
-          <Checkbox />
+          <Checkbox checked={checkboxChecked} onChange={onCheckboxChange} />
         </Aligner.Right>
       </Aligner>
     </Button>

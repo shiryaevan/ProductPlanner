@@ -1,13 +1,20 @@
 import React from 'react';
-import { useRoute, RouteProp } from '@react-navigation/native';
+import { connect } from 'react-redux';
+import { RouteProp } from '@react-navigation/native';
 
 import { Recipe } from './Recipe';
-import { RootStackParamList } from '../../../App';
+import { IRecipe } from '../../store/recipes';
+import { IStore } from '../../store';
+import { RootStackParamList } from '../../App';
 
-type Props = {};
+type Props = { recipe: IRecipe; route: RouteProp<RootStackParamList, 'Recipe'> };
 
-export const RecipeContainer = ({}: Props) => {
-  const router = useRoute<RouteProp<RootStackParamList, 'Recipe'>>();
-
-  return <Recipe {...router.params} />;
+const RecipeContainerPure = ({ recipe }: Props) => {
+  return <Recipe {...recipe} />;
 };
+
+const mapStateToProps = (state: IStore, props: Props) => ({
+  recipe: state.recipes.recipes[props.route.params.id],
+});
+
+export const RecipeContainer = connect(mapStateToProps)(RecipeContainerPure);
