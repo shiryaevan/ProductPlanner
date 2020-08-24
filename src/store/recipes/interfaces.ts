@@ -1,17 +1,6 @@
-export interface IIngredient {
-  title: string;
-  value: number | string;
-  unit?: string;
-}
-
-export interface IRecipe {
-  id: number;
-  title: string;
-  image?: string;
-  ingredients?: IIngredient[];
-}
+import { Recipe } from '../../api/models';
 
 export interface IRecipes {
   isLoading: boolean;
-  recipes: { [key: number]: IRecipe };
+  recipes: { [key: number]: Recipe };
 }
